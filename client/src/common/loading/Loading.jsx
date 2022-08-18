@@ -3,27 +3,27 @@ import './style.scss'
 
 export default function loadingComponent() {
   return (
-    <div>
-        <div class="boxes">
-            <div class="box">
+    <div className='loading-bg'>
+        <div className="boxes">
+            <div className="box">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <div class="box">
+            <div className="box">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <div class="box">
+            <div className="box">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <div class="box">
+            <div className="box">
                 <div></div>
                 <div></div>
                 <div></div>

@@ -1,11 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Header from './Header'
 // import Footer from './Footer'
 
 const Layout = ({children}) => {
+  const loginState = useSelector((state) => state.authReducer.loginState)
   return (
     <>
-        <Header />
+        {loginState ? <Header /> : null}
         {children}
         {/* <Footer /> */}
     </>

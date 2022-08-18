@@ -35,7 +35,7 @@ const Login = () => {
     return (
         <LoginView 
             user={user}
-            setUser={setUser} 
+            loading={loading}
             handleLogin={handleLogin} 
             handleChangeUser={handleChangeUser}
             handleKeyEnter={handleKeyEnter}
