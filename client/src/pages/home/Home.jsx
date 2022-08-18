@@ -1,13 +1,24 @@
 import React, { useRef } from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
-import { TextField } from '@mui/material'
+import { TextField, Slide, Dialog, Button } from '@mui/material'
 import moment from 'moment'
 import './Home.scss'
 
-const HomeView = (props) => {
+// MODAL transition
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />
+})
 
-    const { userData, onImgChange } = props
+const HomeView = (props) => {
+    const { 
+        userData, 
+        onImgChange, 
+        img,
+        modalStatus,
+        setModalStatus
+    } = props
     const imgRef = useRef()
+    console.log(img)
 
     return (
         <div className="Home">
@@ -18,21 +29,21 @@ const HomeView = (props) => {
                     <div className="cover">
                         <img src={userData.coverPicture} alt="" />
                     </div>
-                    <div className="profile-container">
+                    <div className="profile-container" onClick={()=>{imgRef.current.click()}}>
                         <div className="profile">
                             <img src={userData.profilePicture} alt="" />
                         </div>
                         <div className="edit-icon">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            <i className="fa fa-pencil" aria-hidden="true"></i>
                         </div>
-                        <input 
-                            type='file' 
-                            name='profilePicture' 
-                            ref={imgRef}
-                            style={{display: 'none'}}
-                            onChange={onImgChange}
-                        />
                     </div>
+                    <input 
+                        type='file' 
+                        name='profilePicture' 
+                        ref={imgRef}
+                        style={{display: 'none'}}
+                        onChange={onImgChange}
+                    />
                 </div>
 
                 <div className="profile-info">
@@ -100,6 +111,32 @@ const HomeView = (props) => {
                     </div>
                 </div>
             </div>
+            <Dialog
+                open={modalStatus}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={() => setModalStatus(!modalStatus)}
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <div className='cardBody'>
+                    <div className='blur' style={{top: '-18%', right: '-45%', zIndex: -1}}/>
+                    <div className='blur' style={{top: '35%', right: '75%', zIndex: -1}}/>
+                    <div className="preview-avatar">
+                        {img && (
+                            <img src={img.image} alt='' />
+                        )}
+                    </div>
+                    <h1 className='preview-avatar-text'>Sử dụng avatar này?</h1>
+                    <div className="preview-avatar-button-group">
+                        <Button variant="contained" sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}>Đồng ý</Button>
+                        <Button 
+                            variant="contained" 
+                            sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}
+                            onClick={() => imgRef.current.click()}
+                        >Tải Lại</Button>
+                    </div>
+                </div>
+            </Dialog>
         </div>
     )
 }

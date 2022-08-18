@@ -17,23 +17,16 @@ exports.uploadImages = (req, res, next) => {
             })
         }
         let arrayOfFiles = files[""]
-        console.log(arrayOfFiles)
         if(arrayOfFiles) {
-            // let fileNames = []
-            // arrayOfFiles.forEach(file => {
-            //     fileNames.push(file.newFilename)
-            // })
             return res.json({
                 result: 'ok',
                 data: arrayOfFiles.newFilename,
-                // numberOfImages: fileNames.length,
                 messege: 'Upload image successfully'
             })
         } else {
             return res.json({
                 result: 'failed',
                 data: [],
-                // numberOfImages: 0,
                 messege: 'No image to upload'
             })
         }
