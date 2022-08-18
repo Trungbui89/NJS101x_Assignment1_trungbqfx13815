@@ -38,7 +38,6 @@ exports.loginUser = (req, res, next) => {
 
     User.findOne({'userName': userName})
     .then((user) => {
-    // console.log(password)
         if(user) {
             if(password !== user.password) {
                 res.status(400).json('wrong password') 

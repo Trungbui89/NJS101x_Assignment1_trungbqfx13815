@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const AuthRoute = require('./Routes/AuthRoute.js')
+const filesRoute = require('./Routes/filesRoute.js')
 
 // Routes
 const app = express()
@@ -24,3 +25,4 @@ mongoose.connect(
 
 // Use routes
 app.use('/auth', AuthRoute)
+app.use(filesRoute)

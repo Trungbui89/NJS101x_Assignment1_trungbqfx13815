@@ -15,14 +15,6 @@
         height: inherit;
         background: var(--bgColor);
     }
-    .blur {
-        position: absolute;
-        width: 22rem;
-        height: 14rem;
-        border-radius: 50%;
-        background: #a6ddf0;
-        filter: blur(72px)
-    }
     .card-info {
         position: absolute;
         top: 12%;
@@ -47,18 +39,57 @@
                 overflow: hidden;
                 img {
                     width: 100%;
+                    object-fit: cover;
+                    object-position: center center;
                 }
             }
-            .profile {
-                width: var(--profileImgWidth);
-                border-radius: 50%;
+            .profile-container {
                 position: absolute;
                 bottom: calc(var(--profileImgWidth)/-2);
-                box-shadow: var(--profileShadow);
-                overflow: hidden;
-                img {
-                    width: 100%;
+                .profile {
+                    position: relative;
+                    width: var(--profileImgWidth);
+                    height: var(--profileImgWidth);
+                    box-shadow: var(--profileShadow);
+                    border-radius: 50%;
+                    overflow: hidden;
+                    cursor: pointer;
+                    transition: all .3s;
+                    z-index: 1;
+                    img {
+                        width: var(--profileImgWidth);
+                        height: var(--profileImgWidth);
+                        object-fit: cover;
+                        object-position: center center;
+                    }
                 }
+                .edit-icon {
+                    position: absolute;
+                    cursor: pointer;
+                    bottom: 3%;
+                    right: 6%;
+                    box-shadow: var(--profileShadow);
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #7f7f7f;
+                    background: #fff;
+                    border: 0.5px solid #d3d3d3;
+                    z-index: 2;
+                    transition: all .3s;
+                    overflow: hidden;
+                }
+            }
+            .profile-container:hover .edit-icon {
+                color: #4a45a8;
+                transform: scale(1.2);
+            }
+            .profile-container:hover .profile {
+                box-shadow: 0px 6px 17px 2px rgba(0, 0, 0, 0.35);
+                transform: scale(1.05);
             }
         }
         .profile-info {
