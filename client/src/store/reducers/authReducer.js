@@ -15,6 +15,10 @@ const authReducer = (state = {authData: null, loading: false, error: false, logi
             return{...state, authData: action.payload, loading: false, error: false}
         case 'EDIT_USER_FALSE':
             return{...state, loading: false, error: true}
+        // logout
+        case 'AUTH_LOGOUT':
+            localStorage.removeItem('profile')
+            return{authData: null, loading: false, error: false, loginState: false}
         default:
             return state
     }

@@ -20,6 +20,7 @@
         font-size: 1.2rem;
         font-weight: 700;
         padding-top: 12px;
+        padding-inline-start: 0;
         li {
             color: var(--gray);
             transition: all ease 0.3s;
@@ -27,6 +28,24 @@
         }
         li:hover {
             color: var(--location);
+        }
+    }
+    .sign-out {
+        position: absolute;
+        right: 55px;
+        top: 16px;
+        cursor: pointer;
+        z-index: 999;
+        i {
+            font-size: 3rem;
+            color: var(--gray);
+            transition: all .3s linear;
+        }
+    }
+    .sign-out:hover {
+        i {
+            color: #222222;
+            text-shadow: rgba(0, 0, 0, 0.25) 1px 3px 5px;
         }
     }
 }

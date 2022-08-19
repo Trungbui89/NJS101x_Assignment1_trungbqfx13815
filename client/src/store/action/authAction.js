@@ -12,6 +12,10 @@ export const login = (formData) => (dispatch) => {
         })
 }
 
+export const logout = (formData) => (dispatch) => {
+    dispatch({type: 'AUTH_LOGOUT'})
+}
+
 export const editUser = (formData) => (dispatch) => {
     dispatch({type: 'EDIT_USER_START'})
     AuthApi.editUser(formData)
