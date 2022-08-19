@@ -6,7 +6,15 @@ const authReducer = (state = {authData: null, loading: false, error: false, logi
             localStorage.setItem('profile', JSON.stringify({...action?.payload}))
             return{...state, authData: action.payload, loading: false, error: false, loginState: true}
         case 'AUTH_FALSE':
-            return{...state, loading: false, error: true, loginState: false}
+            return{...state, loading: false, error: true}
+        // file upload action
+        case 'FILE_UPLOAD_START':
+            return{...state, loading: true, error: false}
+        case 'FILE_UPLOAD_SUCCESS':
+            localStorage.setItem('profile', JSON.stringify({...action?.payload}))
+            return{...state, authData: action.payload, loading: false, error: false, loginState: true}
+        case 'FILE_UPLOAD_FALSE':
+            return{...state, loading: false, error: true}
         default:
             return state
     }

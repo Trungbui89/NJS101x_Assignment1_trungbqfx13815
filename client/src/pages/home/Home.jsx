@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 import { TextField, Slide, Dialog, Button } from '@mui/material'
 import moment from 'moment'
@@ -15,13 +15,14 @@ const HomeView = (props) => {
         onImgChange, 
         img,
         modalStatus,
-        setModalStatus
+        setModalStatus,
+        imgRef,
+        handleUploadImg
     } = props
-    const imgRef = useRef()
-    console.log(img)
 
     return (
         <div className="Home">
+            {console.log(img)}
             <div className="home-bg" />
             <div className="card-info">
 
@@ -128,7 +129,11 @@ const HomeView = (props) => {
                     </div>
                     <h1 className='preview-avatar-text'>Sử dụng avatar này?</h1>
                     <div className="preview-avatar-button-group">
-                        <Button variant="contained" sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}>Đồng ý</Button>
+                        <Button 
+                            variant="contained" 
+                            sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}
+                            onClick={(e) => handleUploadImg(e)}
+                        >Đồng ý</Button>
                         <Button 
                             variant="contained" 
                             sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}

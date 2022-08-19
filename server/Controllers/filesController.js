@@ -16,7 +16,7 @@ exports.uploadImages = (req, res, next) => {
                 messege: `Cant upload file: ${err}`
             })
         }
-        let arrayOfFiles = files[""]
+        let arrayOfFiles = files["file"]
         if(arrayOfFiles) {
             return res.json({
                 result: 'ok',

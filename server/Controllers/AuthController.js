@@ -53,3 +53,26 @@ exports.loginUser = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ message: error.message }))
 }
+
+exports.postEditProduct = (req, res, next) => {
+    const userId = req.body._id
+    const profilePicture = req.body.profilePicture ? req.body.profilePicture : null
+    const coverPicture = req.body.coverPicture ? req.body.coverPicture : null
+
+    User.findById(userId)
+        .then(user => {
+            if(profilePicture !== null) {
+                user.profilePicture = profilePicture
+            }
+            if(coverPicture !== null) {
+                user.coverPicture = coverPicture
+            }
+            return user.save()
+        })
+        .then(result => {
+            res.status(200).json({message: 'Update successfuly'})
+        })
+        .catch(err => {
+            res.status(500).json({message: `Update failed: ${err.message}`})
+        })
+}
