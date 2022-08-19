@@ -1,7 +1,10 @@
 const formidable = require('formidable')
 const fs = require('fs')
+const dotenv = require('dotenv')
 
-exports.uploadImages = (req, res, next) => {
+dotenv.config()
+
+exports.updateImage = (req, res, next) => {
     const form = formidable({
         uploadDir: './assets/images',
         keepExtensions: true,
@@ -18,9 +21,10 @@ exports.uploadImages = (req, res, next) => {
         }
         let arrayOfFiles = files["file"]
         if(arrayOfFiles) {
+            // const serverName = require('os').hostname()
             return res.json({
                 result: 'ok',
-                data: arrayOfFiles.newFilename,
+                data: `http://localhost:${process.env.PORT}/get-images?image_name=${arrayOfFiles.newFilename}`,
                 messege: 'Upload image successfully'
             })
         } else {

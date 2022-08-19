@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 import { TextField, Slide, Dialog, Button } from '@mui/material'
 import moment from 'moment'
@@ -13,23 +13,35 @@ const HomeView = (props) => {
     const { 
         userData, 
         onImgChange, 
-        img,
+        imgData,
         modalStatus,
         setModalStatus,
-        imgRef,
         handleUploadImg
     } = props
+    const imgRef = useRef()
+    const coverImgRef = useRef()
 
     return (
         <div className="Home">
-            {console.log(img)}
             <div className="home-bg" />
             <div className="card-info">
 
                 <div className="profile-images">
-                    <div className="cover">
-                        <img src={userData.coverPicture} alt="" />
+                    <div className="cover-container" onClick={()=>{coverImgRef.current.click()}}>
+                        <div className="cover">
+                            <img src={userData.coverPicture} alt="" />
+                        </div>
+                        <div className="edit-cover-img-icon">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </div>
                     </div>
+                    <input 
+                        type='file' 
+                        name='coverPicture' 
+                        ref={coverImgRef}
+                        style={{display: 'none'}}
+                        onChange={onImgChange}
+                    />
                     <div className="profile-container" onClick={()=>{imgRef.current.click()}}>
                         <div className="profile">
                             <img src={userData.profilePicture} alt="" />
@@ -123,8 +135,8 @@ const HomeView = (props) => {
                     <div className='blur' style={{top: '-18%', right: '-45%', zIndex: -1}}/>
                     <div className='blur' style={{top: '35%', right: '75%', zIndex: -1}}/>
                     <div className="preview-avatar">
-                        {img && (
-                            <img src={img.image} alt='' />
+                        {imgData && (
+                            <img src={imgData.data} alt='' />
                         )}
                     </div>
                     <h1 className='preview-avatar-text'>Sử dụng avatar này?</h1>

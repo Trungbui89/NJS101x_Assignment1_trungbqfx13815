@@ -1,5 +1,4 @@
 const User = require("../Models/user.js")
-const jwt = require("jsonwebtoken")
 
 exports.registerUser = (req, res, next) => {
     const userName = req.body.userName
@@ -42,10 +41,7 @@ exports.loginUser = (req, res, next) => {
             if(password !== user.password) {
                 res.status(400).json('wrong password') 
             } else {
-                const token = jwt.sign({
-                    userName: user.userName, id: user._id
-                }, process.env.JWT_KEY, {expiresIn: '1h'})
-                res.status(200).json({user: user, token: token})
+                res.status(200).json({user: user})
             }
         } else {
             res.status(404).json('User does not exists')
@@ -54,23 +50,21 @@ exports.loginUser = (req, res, next) => {
     .catch(error => res.status(500).json({ message: error.message }))
 }
 
-exports.postEditProduct = (req, res, next) => {
+exports.postEditUser = (req, res, next) => {
     const userId = req.body._id
-    const profilePicture = req.body.profilePicture ? req.body.profilePicture : null
-    const coverPicture = req.body.coverPicture ? req.body.coverPicture : null
+    const profilePicture = req.body.profilePicture
+    const coverPicture = req.body.coverPicture
 
     User.findById(userId)
         .then(user => {
-            if(profilePicture !== null) {
-                user.profilePicture = profilePicture
-            }
-            if(coverPicture !== null) {
-                user.coverPicture = coverPicture
-            }
+            user.profilePicture = profilePicture
+            user.coverPicture = coverPicture
             return user.save()
         })
         .then(result => {
-            res.status(200).json({message: 'Update successfuly'})
+            const resData = {...result._doc, _id: userId} 
+            // console.log(resData)
+            res.status(200).json({user: resData})
         })
         .catch(err => {
             res.status(500).json({message: `Update failed: ${err.message}`})

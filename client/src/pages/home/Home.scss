@@ -33,14 +33,53 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            .cover {
+            .cover-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
                 width: 100%;
                 height: 12rem;
                 overflow: hidden;
-                img {
+                cursor: pointer;
+                .cover {
                     width: 100%;
-                    object-fit: cover;
-                    object-position: center center;
+                    height: 100%;
+                    overflow: hidden;
+                    transition: all 300ms linear;
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                        object-position: center center;
+                    }
+                }
+                .edit-cover-img-icon {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: all 300ms linear;
+                    >.fa {
+                        font-size: 0;
+                        position: relative;
+                        top: -17%;
+                        transition: all 300ms linear;
+                    }
+                }
+            }
+            .cover-container:hover {
+                .cover {
+                    transform: scale(1.1);
+                }
+                .edit-cover-img-icon {
+                    backdrop-filter: blur(1px);
+                    background: rgba(0, 0, 0, .15);
+                    .fa{
+                        font-size: 4.5rem;
+                    }
                 }
             }
             .profile-container {

@@ -1,31 +1,30 @@
-import React, { useRef } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import HomeView from './Home'
-import { updateAvatar } from '../../store/action/fileAction'
+import { updateImage } from '../../store/action/fileAction'
+import { editUser } from "../../store/action/authAction"
 
 const Home = () => {
-    const dispatch = useDispatch()
-    const imgRef = useRef()
-    const [img, setImg] = React.useState(null)
-    const [modalStatus, setModalStatus] = React.useState(false)
     const userData = useSelector((state) => state.authReducer.authData.user)
+    const imgData = useSelector((state) => state.fileReducer.imgData)
+    const dispatch = useDispatch()
+    const [modalStatus, setModalStatus] = React.useState(false)
 
-    const onImgChange = (e) => {
+    const onImgChange = async (e) => {
         if(e.target.files && e.target.files[0]) {
-            let image = e.target.files[0]
-            setImg({
-                image: URL.createObjectURL(image),
-                imageData: image
-            })
+            const data = new FormData() 
+            data.append('file', e.target.files[0])
+            await dispatch(updateImage(data, e.target.name))
             setModalStatus(true)
         }
     }
 
-    const handleUploadImg = (e) => {
+    const handleUploadImg = async (e) => {
         e.preventDefault()
-        const data = new FormData() 
-        data.append('file', img.imageData)
-        dispatch(updateAvatar(data))
+        const profilePicture = imgData.data
+        const user = {...userData, profilePicture: profilePicture}
+        await dispatch(editUser(user))
+        setModalStatus(false)
     }
 
     return (
@@ -35,8 +34,7 @@ const Home = () => {
             onImgChange={onImgChange}
             setModalStatus={setModalStatus}
             handleUploadImg={handleUploadImg}
-            img={img}
-            imgRef={imgRef}
+            imgData={imgData}
         />
     )
 }

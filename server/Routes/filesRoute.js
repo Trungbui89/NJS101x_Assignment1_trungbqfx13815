@@ -1,9 +1,9 @@
 const express = require('express')
-const { uploadImages, getImages } = require('../Controllers/filesController.js')
+const { updateImage, getImages } = require('../Controllers/filesController.js')
 
 const router = express.Router()
 
-router.post('/upload-images', uploadImages)
+router.post('/update-image', updateImage)
 
 router.get('/get-images', getImages)
 
