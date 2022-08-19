@@ -21,8 +21,13 @@ const Home = () => {
 
     const handleUploadImg = async (e) => {
         e.preventDefault()
-        const profilePicture = imgData.data
-        const user = {...userData, profilePicture: profilePicture}
+        const ReqImgData = imgData.data
+        const user = 
+            imgData.imgType === 'profilePicture' 
+            ? 
+                {...userData, profilePicture: ReqImgData}
+            :
+                {...userData, coverPicture: ReqImgData}
         await dispatch(editUser(user))
         setModalStatus(false)
     }

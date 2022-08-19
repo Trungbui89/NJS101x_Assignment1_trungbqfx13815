@@ -32,7 +32,7 @@ const HomeView = (props) => {
                             <img src={userData.coverPicture} alt="" />
                         </div>
                         <div className="edit-cover-img-icon">
-                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            <i className="fa fa-pencil-square" aria-hidden="true"></i>
                         </div>
                     </div>
                     <input 
@@ -128,18 +128,23 @@ const HomeView = (props) => {
                 open={modalStatus}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={() => setModalStatus(!modalStatus)}
+                onClose={() => setModalStatus(false)}
                 aria-describedby="alert-dialog-slide-description"
             >
                 <div className='cardBody'>
                     <div className='blur' style={{top: '-18%', right: '-45%', zIndex: -1}}/>
                     <div className='blur' style={{top: '35%', right: '75%', zIndex: -1}}/>
-                    <div className="preview-avatar">
-                        {imgData && (
+                    {imgData && imgData.imgType === 'profilePicture' && (
+                        <div className='preview-avatar'>
                             <img src={imgData.data} alt='' />
-                        )}
-                    </div>
-                    <h1 className='preview-avatar-text'>Sử dụng avatar này?</h1>
+                        </div>
+                    )}
+                    {imgData && imgData.imgType === 'coverPicture' && (
+                        <div className="preview-cover">
+                            <img src={imgData.data} alt='' />
+                        </div>
+                    )}
+                    <h1 className='preview-avatar-text'>{imgData && imgData.imgMess}</h1>
                     <div className="preview-avatar-button-group">
                         <Button 
                             variant="contained" 
@@ -149,7 +154,13 @@ const HomeView = (props) => {
                         <Button 
                             variant="contained" 
                             sx={{margin: '0 12px', padding: '6px 32px', textTransform: 'none'}}
-                            onClick={() => imgRef.current.click()}
+                            onClick={() => {
+                                if(imgData && imgData.imgType === 'profilePicture') {
+                                    imgRef.current.click()
+                                } else {
+                                    coverImgRef.current.click()
+                                }
+                            }}
                         >Tải Lại</Button>
                     </div>
                 </div>
