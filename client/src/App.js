@@ -4,6 +4,7 @@ import './App.css'
 import Login from './pages/login/LoginController'
 import Layout from './layout/Layout';
 import HomeController from './pages/home/HomeController';
+import Attendance from './pages/attendance/AttendanceController';
 
 function App() {
   const user = useSelector((state) => state.authReducer.authData)
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' element={user ? <Navigate to = 'home'/> : <Navigate to = 'login'/>} />
           <Route path='/home' element={user ? <HomeController /> : <Navigate to = '../login' />} />
           <Route path='/login' element={user ? <Navigate to = '../home' /> : <Login />} />
+          <Route path='/attendance' element={user ? <Attendance /> : <Navigate to = '../login' />} />
         </Routes>
       </Layout>
     </div>

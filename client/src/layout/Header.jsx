@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Header(props) {
     const {
         handleLogout
@@ -6,8 +8,8 @@ export default function Header(props) {
     return (
         <div className="header">
             <ul className="list-items">
-                <li>Thông tin cá nhân</li>
-                <li>Điểm danh</li>
+                <li><Link to={'/home'}>Thông tin cá nhân</Link></li>
+                <li><Link to={'/attendance'}>Điểm danh</Link></li>
                 <li>Tra cứu giờ làm</li>
                 <li>Thông tin Covid cá nhân</li>
             </ul>

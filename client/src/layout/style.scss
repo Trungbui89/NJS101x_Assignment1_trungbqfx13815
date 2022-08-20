@@ -22,11 +22,14 @@
         padding-top: 12px;
         padding-inline-start: 0;
         li {
-            color: var(--gray);
-            transition: all ease 0.3s;
             cursor: pointer;
+            a {
+                color: var(--gray);
+                text-decoration: none;
+                transition: all ease 0.3s;
+            }
         }
-        li:hover {
+        li:hover a {
             color: var(--location);
         }
     }

@@ -17,12 +17,11 @@
     }
     .card-info {
         position: absolute;
-        top: 12%;
+        top: 6rem;
         left: 50%;
         transform: translateX(-50%);
         width: var(--cardInfoWidth);
         border-radius: 1.5rem;
-        background: #fff;
         box-shadow: var(--profileShadow);
         overflow: hidden;
         display: flex;

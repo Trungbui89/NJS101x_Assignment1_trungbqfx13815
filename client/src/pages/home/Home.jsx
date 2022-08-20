@@ -77,7 +77,7 @@ const HomeView = (props) => {
                             <Grid xs={6}>
                                 <TextField 
                                     id="outlined-basic-2" 
-                                    label="doB"
+                                    label="Ngày sinh"
                                     value={moment(userData.dob).format('DD/MM/YYYY')}
                                     disabled
                                     fullWidth
@@ -90,7 +90,7 @@ const HomeView = (props) => {
                             <Grid xs={6}>
                                 <TextField 
                                     id="outlined-basic" 
-                                    label="salaryScale"
+                                    label="Thang lương"
                                     value={userData.salaryScale}
                                     disabled
                                     fullWidth
@@ -100,7 +100,7 @@ const HomeView = (props) => {
                             <Grid xs={6}>
                                 <TextField 
                                     id="outlined-basic-2" 
-                                    label="startDate"
+                                    label="Ngày tham gia"
                                     value={moment(userData.startDate).format('DD/MM/YYYY')}
                                     disabled
                                     fullWidth
@@ -113,7 +113,7 @@ const HomeView = (props) => {
                             <Grid xs={6}>
                                 <TextField 
                                     id="outlined-basic" 
-                                    label="annualLeave"
+                                    label="Số ngày nghỉ"
                                     value={userData.annualLeave}
                                     disabled
                                     fullWidth

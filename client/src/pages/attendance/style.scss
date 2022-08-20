@@ -1,0 +1,64 @@
+@import url('../../App.css');
+
+:root {
+    --profileImgWidth: 10rem;
+}
+
+.Attendance {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    .Attendance-bg {
+        position: relative;
+        width: inherit;
+        height: inherit;
+        background: var(--bgColor);
+    }
+    .card-info {
+        position: absolute;
+        top: 10rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--cardInfoWidth);
+        border-radius: 1.5rem;
+        box-shadow: var(--profileShadow);
+        display: flex;
+        flex-direction: column;
+        .profile-container {
+            position: absolute;
+            top: calc(var(--profileImgWidth)/-2 + 1rem);
+            left: calc(var(--profileImgWidth)/-2 + 1rem);
+            width: var(--profileImgWidth);
+            height: var(--profileImgWidth);
+            box-shadow: var(--profileShadow);
+            border-radius: 50%;
+            .profile {
+                position: relative;
+                width: var(--profileImgWidth);
+                height: var(--profileImgWidth);
+                box-shadow: var(--profileShadow);
+                border-radius: 50%;
+                overflow: hidden;
+                cursor: pointer;
+                transition: all .3s;
+                z-index: 1;
+                img {
+                    width: var(--profileImgWidth);
+                    height: var(--profileImgWidth);
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+        }
+    }
+    .content {
+        margin-top: calc(var(--profileImgWidth)/2 - 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .name {
+            font-size: 1.5rem;
+        }
+    }
+}
