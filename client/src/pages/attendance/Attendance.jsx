@@ -20,23 +20,39 @@ export default function Attendance(props) {
                     <p className='name'>{userData.name}</p>
                     <div className="work-status">
                         <p>trạng thái: </p>
-                        
+                        {
+                            userData.attendanceId 
+                            ?
+                                <div className="working">
+                                    <p>Đang làm việc</p>
+                                </div>
+                            :
+                                <div className="rest">
+                                    <p>Không làm việc</p>
+                                </div>
+                        }
                     </div>
-                        <FormControl className=''>
-                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                // value={age}
-                                label="Age"
-                                // onChange={handleChange}
-                                defaultValue={10}
-                            >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
-                        </FormControl>
+                    {
+                        userData.attendanceId
+                        ?
+                            null
+                        :
+                            <FormControl className=''>
+                                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    // value={age}
+                                    label="Age"
+                                    // onChange={handleChange}
+                                    defaultValue={10}
+                                >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                    }
                 </div>
             </div>
         </div>

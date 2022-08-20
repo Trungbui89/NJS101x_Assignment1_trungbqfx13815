@@ -4,9 +4,9 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const AuthRoute = require('./Routes/AuthRoute.js')
-const filesRoute = require('./Routes/filesRoute.js')
+const FilesRoute = require('./Routes/filesRoute.js')
+const AttendanceRoute = require('./Routes/AttendanceRoute.js')
 
-// Routes
 const app = express()
 
 // Middleware
@@ -25,4 +25,5 @@ mongoose.connect(
 
 // Use routes
 app.use('/auth', AuthRoute)
-app.use(filesRoute)
+app.use(FilesRoute)
+app.use('/attendance', AttendanceRoute)

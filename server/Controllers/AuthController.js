@@ -11,6 +11,7 @@ exports.registerUser = (req, res, next) => {
     const annualLeave = req.body.annualLeave
     const profilePicture = req.body.profilePicture
     const coverPicture = req.body.coverPicture
+    const attendanceId = null
     const user = new User({
         userName: userName,
         password: password,
@@ -22,6 +23,7 @@ exports.registerUser = (req, res, next) => {
         annualLeave: annualLeave,
         profilePicture: profilePicture,
         coverPicture: coverPicture,
+        attendanceId: attendanceId,
     })
     user
         .save()
