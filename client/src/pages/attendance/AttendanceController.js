@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Attendance from './Attendance'
 import { addAttendance } from '../../store/action/attendanceAction'
+import { reGetUser } from '../../store/action/authAction'
 
 const AttendanceController = () => {
     const dispatch = useDispatch()
@@ -15,13 +16,12 @@ const AttendanceController = () => {
     }
 
     const handleAttendanceUp = async (e) => {
-        e.preventDefault()
         await dispatch(addAttendance({
             workplace: workplace,
             _id: userData._id,
             name: userData.name
         }))
-        
+        await dispatch(reGetUser({userId: userData._id}))
     }
 
     const handleAttendanceDown = (e) => {

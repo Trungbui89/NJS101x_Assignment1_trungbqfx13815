@@ -16,6 +16,19 @@ export const logout = (formData) => (dispatch) => {
     dispatch({type: 'AUTH_LOGOUT'})
 }
 
+export const reGetUser = (formData) => (dispatch) => {
+    dispatch({type: 'GET_USER_START'})
+    AuthApi.getUser(formData)
+        .then(result => {
+            console.log(result)
+            dispatch({type: 'GET_USER_SUCCESS', payload: result.data})
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({type: 'GET_USER_FAILED'})
+        })
+}
+
 export const editUser = (formData) => (dispatch) => {
     dispatch({type: 'EDIT_USER_START'})
     AuthApi.editUser(formData)

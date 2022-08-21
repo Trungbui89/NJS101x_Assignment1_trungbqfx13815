@@ -16,6 +16,13 @@ const authReducer = (state = {authData: null, loading: false, error: false, logi
         // logout
         case 'AUTH_LOGOUT':
             return{authData: null, loading: false, error: false, loginState: false}
+        // reget user
+        case 'GET_USER_START':
+            return{...state, loading: true, error: false}
+        case 'GET_USER_SUCCESS':
+            return{...state, loading: false, error: false, authData: action.payload}
+        case 'GET_USER_FAILED':
+            return{...state, loading: false, error: true}
         default:
             return state
     }

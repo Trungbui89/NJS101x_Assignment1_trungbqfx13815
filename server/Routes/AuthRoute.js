@@ -9,6 +9,6 @@ router.post('/login', loginUser)
 
 router.post('/edit_user', postEditUser)
 
-router.get('/get_user', getUser)
+router.post('/get_user', getUser)
 
 module.exports = router

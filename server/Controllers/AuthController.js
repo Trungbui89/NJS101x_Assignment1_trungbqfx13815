@@ -52,8 +52,7 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.getUser = (req, res, next) => {
-    const userId = req.body
-
+    const userId = req.body.userId
     User.findOne({'_id': userId})
         .then(user => {
             if(user) {
