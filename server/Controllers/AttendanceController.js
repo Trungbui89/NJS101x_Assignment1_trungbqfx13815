@@ -26,7 +26,7 @@ exports.addAttendance = (req, res, next) => {
                 return user.save()
             })
             .then(userResult => {
-                res.status(200).json({data: result})
+                res.status(200).json({attendance: result})
             })
         })
         .catch(err => console.log(err))

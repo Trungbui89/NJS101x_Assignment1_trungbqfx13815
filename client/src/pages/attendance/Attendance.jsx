@@ -1,11 +1,20 @@
 import React from 'react'
-import { MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { MenuItem, Select, InputLabel, FormControl, Grid, Button } from '@mui/material'
+import EventAvailableIcon from '@mui/icons-material/EventAvailable'
+import EventRepeatIcon from '@mui/icons-material/EventRepeat'
+import EventBusyIcon from '@mui/icons-material/EventBusy'
 import './style.scss'
 
 export default function Attendance(props) {
     const {
-        userData
+        userData,
+        workplace,
+        handleWorkplaceChange,
+        selectItem,
+        handleAttendanceUp,
+        handleAttendanceDown
     } = props
+    const checker = userData.attendanceId
 
     return (
         <div className="Attendance">
@@ -21,7 +30,7 @@ export default function Attendance(props) {
                     <div className="work-status">
                         <p>trạng thái: </p>
                         {
-                            userData.attendanceId 
+                            checker 
                             ?
                                 <div className="working">
                                     <p>Đang làm việc</p>
@@ -33,26 +42,59 @@ export default function Attendance(props) {
                         }
                     </div>
                     {
-                        userData.attendanceId
+                        checker
                         ?
                             null
                         :
-                            <FormControl className=''>
-                                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    // value={age}
-                                    label="Age"
-                                    // onChange={handleChange}
-                                    defaultValue={10}
-                                >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <Grid container spacing={2} className="workplance-input">
+                                <Grid xs={5}>
+                                    <p className='input-label'>Địa điểm làm việc:</p>
+                                </Grid>
+                                <Grid xs={7}>
+                                    <FormControl className='input-selector'>
+                                        <InputLabel id="simple-select-label">Địa điểm</InputLabel>
+                                        <Select
+                                            labelId="simple-select-label"
+                                            id="simple-select"
+                                            value={workplace}
+                                            label="Địa điểm"
+                                            onChange={e => handleWorkplaceChange(e)}
+                                        >
+                                            {
+                                                selectItem.map((item, index) => {
+                                                    return <MenuItem value={item} key={index}>{item}</MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
                     }
+                    <div className="button-group">
+                        {
+                            checker
+                            ?
+                                <Button 
+                                    variant="contained" 
+                                    startIcon={<EventBusyIcon /> }
+                                    onClick={e => handleAttendanceDown(e)}
+                                >
+                                    Kết thúc làm
+                                </Button>
+                            :
+                                <Button 
+                                    variant="contained" 
+                                    startIcon={<EventAvailableIcon />}
+                                    onClick={e => handleAttendanceUp(e)}
+                                >
+                                    Điểm Danh
+                                </Button>
+                        }
+                        
+                        <Button variant="contained" startIcon={<EventRepeatIcon />}>
+                            Xin Nghỉ Phép
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
