@@ -20,7 +20,6 @@ export const reGetUser = (formData) => (dispatch) => {
     dispatch({type: 'GET_USER_START'})
     AuthApi.getUser(formData)
         .then(result => {
-            console.log(result)
             dispatch({type: 'GET_USER_SUCCESS', payload: result.data})
         })
         .catch(err => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { MenuItem, Select, InputLabel, FormControl, Grid, Button } from '@mui/material'
 import EventAvailableIcon from '@mui/icons-material/EventAvailable'
 import EventRepeatIcon from '@mui/icons-material/EventRepeat'
@@ -9,6 +10,7 @@ export default function Attendance(props) {
     const {
         userData,
         workplace,
+        attendanceData,
         handleWorkplaceChange,
         selectItem,
         handleAttendanceUp,
@@ -44,7 +46,10 @@ export default function Attendance(props) {
                     {
                         checker
                         ?
-                            null
+                            <div className="attended">
+                                <p>Nơi làm: {attendanceData.attendanceData.workplace}</p>
+                                <p>Thời gian bắt đầu: {moment(attendanceData.attendanceData.startTime).format('DD/MM/YYYY, h:mm:ss a')}</p>
+                            </div>
                         :
                             <Grid container spacing={2} className="workplance-input">
                                 <Grid xs={5}>

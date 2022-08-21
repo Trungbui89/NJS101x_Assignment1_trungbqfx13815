@@ -22,7 +22,9 @@ exports.addAttendance = (req, res, next) => {
             const userId = result.user.userId
             User.findById(userId)
             .then(user => {
-                user.attendanceId = attendanceId
+                if(user) {
+                    user.attendanceId = attendanceId
+                }
                 return user.save()
             })
             .then(userResult => {
