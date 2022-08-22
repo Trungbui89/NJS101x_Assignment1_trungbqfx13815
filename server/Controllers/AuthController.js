@@ -68,16 +68,17 @@ exports.postEditUser = (req, res, next) => {
     const userId = req.body._id
     const profilePicture = req.body.profilePicture
     const coverPicture = req.body.coverPicture
+    const attendanceId = req.body.attendanceId
 
     User.findById(userId)
         .then(user => {
             user.profilePicture = profilePicture
             user.coverPicture = coverPicture
+            user.attendanceId = attendanceId
             return user.save()
         })
         .then(result => {
-            const resData = {...result._doc, _id: userId} 
-            // console.log(resData)
+            const resData = {...result._doc, _id: userId}
             res.status(200).json({user: resData})
         })
         .catch(err => {

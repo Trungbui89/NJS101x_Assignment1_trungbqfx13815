@@ -12,8 +12,9 @@ export const login = (formData) => (dispatch) => {
         })
 }
 
-export const logout = (formData) => (dispatch) => {
+export const logout = () => (dispatch) => {
     dispatch({type: 'AUTH_LOGOUT'})
+    dispatch({type: 'ATTENDANCE_LOGOUT'})
 }
 
 export const reGetUser = (formData) => (dispatch) => {

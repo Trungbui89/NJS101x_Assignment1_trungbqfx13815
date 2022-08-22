@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Attendance from './Attendance'
-import { addAttendance } from '../../store/action/attendanceAction'
+import { addAttendance, getAttendanceInfo, endAttendance } from '../../store/action/attendanceAction'
 
 const AttendanceController = () => {
     const dispatch = useDispatch()
@@ -14,6 +14,19 @@ const AttendanceController = () => {
         setWorkplace(e.target.value)
     }
 
+    const handleGetAttendance = () => {
+        if(userData.attendanceId) {
+            dispatch(getAttendanceInfo({attendanceId: userData.attendanceId}))
+        } else {
+            return undefined
+        }
+    }
+
+    React.useEffect(() => {
+        handleGetAttendance()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
     const handleAttendanceUp = (e) => {
         dispatch(addAttendance({
             workplace: workplace,
@@ -22,8 +35,10 @@ const AttendanceController = () => {
         }, userData))
     }
 
-    const handleAttendanceDown = (e) => {
-        
+    const handleAttendanceDown = () => {
+        dispatch(endAttendance({
+            attendanceId: attendanceData.attendanceData._id
+        }, userData._id))
     }
 
     return (

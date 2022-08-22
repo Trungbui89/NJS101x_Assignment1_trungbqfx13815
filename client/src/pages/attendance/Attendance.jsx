@@ -16,7 +16,7 @@ export default function Attendance(props) {
         handleAttendanceUp,
         handleAttendanceDown
     } = props
-    const checker = userData.attendanceId
+    const checker = attendanceData.attendanceData && userData.attendanceId
 
     return (
         <div className="Attendance">
