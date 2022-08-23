@@ -35,12 +35,11 @@ export default function Attendance(props) {
         annualState,
         setAnnualState,
         workTimeFomated,
-        annualQuantityIndex,
-        handleChangeAnnualQuantity
+        handleChangeAnnualQuantity,
+        annualData,
+        handleAnnualData
     } = props
-    const checker = attendanceData.attendanceData && userData.attendanceId 
-
-    const [value, setValue] = React.useState(null)  
+    const checker = attendanceData.attendanceData && userData.attendanceId
 
     return (
         <>
@@ -210,9 +209,8 @@ export default function Attendance(props) {
                         <p style={{ marginLeft: '0.5rem'}}>Chọn thời gian nghỉ phép:</p>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <AttendanceInput 
-                                value={value}
-                                setValue={setValue}
-                                annualQuantityIndex={annualQuantityIndex}
+                                annualData={annualData}
+                                handleAnnualData={handleAnnualData}
                             />
                         </LocalizationProvider>
                         <div className="date-btn-group">
@@ -248,12 +246,17 @@ export default function Attendance(props) {
                                 label="Lý do"
                                 placeholder='Nhập lý do xin nghỉ'
                                 margin="dense"
+                                value={annualData.reason}
+                                onChange={e => handleAnnualData('reason', 0, e.target.value)}
                                 sx={{width: '100%', paddingRight: '1rem'}}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         <Button 
                             variant="contained" 
                             startIcon={<EventRepeatIcon />}
-                            disable={userData.annualLeave === 0 ? false : true}
+                            disabled={userData.annualLeave <= 0 ? true : false}
                             sx={{
                                 position: 'relative',
                                 borderRadius: '0', 
@@ -264,7 +267,7 @@ export default function Attendance(props) {
                                 width: '97.5%',
                             }}
                         >
-                            Đăng ký Nghỉ
+                            {userData.annualLeave <= 0 ? 'Không đủ thời gian nghỉ' : 'Đăng ký Nghỉ'}
                         </Button>
                     </DialogContent>
                 </ThemeProvider>

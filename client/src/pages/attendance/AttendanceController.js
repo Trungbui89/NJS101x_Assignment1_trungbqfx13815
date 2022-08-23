@@ -14,7 +14,14 @@ const AttendanceController = () => {
     const [workplace, setWorkplace] = useState(selectItem[1])
     const [modal, setModal] = useState(false)
     const [annualState, setAnnualState] = useState(false)
-    const [annualQuantityIndex, setAnnualQuantityIndex] = useState([{index: 1}])
+    const [annualData, setAnnualData] = useState({
+        reason: '',
+        annualLeaveDateList: [{
+            index: 1,
+            annualDate: null,
+            annualTime: 0
+        }]
+    })
 
     // handle workplace input
     const handleWorkplaceChange = (e) => {
@@ -51,7 +58,7 @@ const AttendanceController = () => {
         setModal(true)
     }
 
-    // 
+    // work time format
     const workTime = endAttendanceData?.reduce((total, currentValue) => {
         const endTime = moment(currentValue.endTime)
         const startTime = moment(currentValue.startTime)
@@ -65,35 +72,65 @@ const AttendanceController = () => {
     const seconds = Math.round((workTime - hours*60*60*1000 - minutes*60*1000)/1000)
     const workTimeFomated = `${hours} giờ ${minutes} phút ${seconds} giây`
 
+    // handle add/remove annualLeave input
     const handleChangeAnnualQuantity = (type) => {
         if(type === 'add') {
-            const newIndex = annualQuantityIndex[annualQuantityIndex.length - 1].index + 1
-            setAnnualQuantityIndex([...annualQuantityIndex, {index: newIndex}])
-        } else if(type === 'remove') {
-            const newIndexArr = annualQuantityIndex.filter(item => {
-                return item.index !== annualQuantityIndex.length || item.index === 1
+            const newIndex = annualData.annualLeaveDateList[annualData.annualLeaveDateList.length - 1].index + 1
+            setAnnualData({
+                ...annualData, 
+                annualLeaveDateList: [
+                    ...annualData.annualLeaveDateList, 
+                    {index: newIndex, annualDate: null, annualTime: 0}
+                ]
             })
-            setAnnualQuantityIndex(newIndexArr)
+        } else if(type === 'remove') {
+            const newAnnualDateList = annualData.annualLeaveDateList.filter(item => {
+                return item.index !== annualData.annualLeaveDateList.length || item.index === 1
+            })
+            setAnnualData({...annualData, annualLeaveDateList: newAnnualDateList})
+        }
+    }
+
+    // handle annualLeave data
+    const handleAnnualData = (type, index, data) => {
+        const newAnnualArr = [...annualData.annualLeaveDateList]
+        switch(type) {
+            case 'dateData':
+                newAnnualArr[index] = {...annualData.annualLeaveDateList[index], annualDate: data}
+                setAnnualData({...annualData, annualLeaveDateList: newAnnualArr})
+                break
+            case 'timeData':
+                newAnnualArr[index] = {...annualData.annualLeaveDateList[index], annualTime: data}
+                setAnnualData({...annualData, annualLeaveDateList: newAnnualArr})
+                break
+            case 'reason':
+                const newArr = {...annualData}
+                newArr.reason = data
+                setAnnualData(newArr)
+                break
+            default:
+                break
         }
     }
 
     return (
         <Attendance 
             userData={userData}
-            attendanceData={attendanceData}
-            endAttendanceData={endAttendanceData}
             selectItem={selectItem}
-            workplace={workplace}
-            modal={modal}
-            annualState={annualState}
             workTimeFomated={workTimeFomated}
-            annualQuantityIndex={annualQuantityIndex}
-            setModal={setModal}
-            setAnnualState={setAnnualState}
-            handleWorkplaceChange={handleWorkplaceChange}
+            attendanceData={attendanceData}
             handleAttendanceUp={handleAttendanceUp}
+            endAttendanceData={endAttendanceData}
             handleAttendanceDown={handleAttendanceDown}
             handleChangeAnnualQuantity={handleChangeAnnualQuantity}
+            modal={modal}
+            setModal={setModal}
+            workplace={workplace}
+            handleWorkplaceChange={handleWorkplaceChange}
+            annualState={annualState}
+            setAnnualState={setAnnualState}
+            annualData={annualData}
+            handleAnnualData={handleAnnualData}
         />
     )
 }

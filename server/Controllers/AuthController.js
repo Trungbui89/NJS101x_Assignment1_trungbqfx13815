@@ -12,6 +12,7 @@ exports.registerUser = (req, res, next) => {
     const profilePicture = req.body.profilePicture
     const coverPicture = req.body.coverPicture
     const attendanceId = null
+    const annualLeaveList = null
     const user = new User({
         userName: userName,
         password: password,
@@ -24,6 +25,7 @@ exports.registerUser = (req, res, next) => {
         profilePicture: profilePicture,
         coverPicture: coverPicture,
         attendanceId: attendanceId,
+        annualLeaveList: annualLeaveList
     })
     user
         .save()
@@ -69,16 +71,18 @@ exports.postEditUser = (req, res, next) => {
     const profilePicture = req.body.profilePicture
     const coverPicture = req.body.coverPicture
     const attendanceId = req.body.attendanceId
+    const annualLeaveList = req.body.annualLeaveList
 
     User.findById(userId)
         .then(user => {
             user.profilePicture = profilePicture
             user.coverPicture = coverPicture
             user.attendanceId = attendanceId
+            user.annualLeaveList = annualLeaveList
             return user.save()
         })
         .then(result => {
-            const resData = {...result._doc, _id: userId}
+            console.log(result)
             res.status(200).json({user: resData})
         })
         .catch(err => {
