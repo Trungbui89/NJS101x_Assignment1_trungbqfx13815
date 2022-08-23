@@ -3,7 +3,6 @@ const endAttendanceReducer = ((state = {endAttendanceData: null, loading: false,
         case 'END_ATTENDANCE_START':
             return {...state, loading: true, err: false}
         case 'END_ATTENDANCE_SUCCESS':
-            console.log(action.payload)
             return {...state, endAttendanceData: action.payload, loading: false, err: false}
         case 'END_ATTENDANCE_FAILED':
             return {...state, loading: false, err: true}
