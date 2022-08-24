@@ -72,6 +72,7 @@ exports.postEditUser = (req, res, next) => {
     const coverPicture = req.body.coverPicture
     const attendanceId = req.body.attendanceId
     const annualLeaveList = req.body.annualLeaveList
+    const annualLeave = req.body.annualLeave
 
     User.findById(userId)
         .then(user => {
@@ -79,11 +80,12 @@ exports.postEditUser = (req, res, next) => {
             user.coverPicture = coverPicture
             user.attendanceId = attendanceId
             user.annualLeaveList = annualLeaveList
+            user.annualLeave = annualLeave
             return user.save()
         })
         .then(result => {
             console.log(result)
-            res.status(200).json({user: resData})
+            res.status(200).json({user: result})
         })
         .catch(err => {
             res.status(500).json({message: `Update failed: ${err.message}`})

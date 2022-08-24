@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import Attendance from './Attendance'
 import { addAttendance, getAttendanceInfo, endAttendance } from '../../store/action/attendanceAction'
+import { editUser } from '../../store/action/authAction'
 
 const AttendanceController = () => {
     const dispatch = useDispatch()
@@ -100,7 +101,15 @@ const AttendanceController = () => {
                 setAnnualData({...annualData, annualLeaveDateList: newAnnualArr})
                 break
             case 'timeData':
-                newAnnualArr[index] = {...annualData.annualLeaveDateList[index], annualTime: data}
+                let newData = 0
+                if(data < 0) {
+                    newData = 0
+                } else if (data > 8) {
+                    newData = 8
+                } else {
+                    newData = data
+                }
+                newAnnualArr[index] = {...annualData.annualLeaveDateList[index], annualTime: newData}
                 setAnnualData({...annualData, annualLeaveDateList: newAnnualArr})
                 break
             case 'reason':
@@ -111,6 +120,37 @@ const AttendanceController = () => {
             default:
                 break
         }
+    }
+
+    const handleSubmitAnnual = () => {
+        const newAnnualLeaveDateList = [
+            ...annualData.annualLeaveDateList.map(item => {
+                return ({
+                    annualDate: item.annualDate,
+                    annualTime: item.annualTime
+                })
+            })
+            
+        ]
+        const newAnnualLeave = 
+            annualData.annualLeaveDateList.reduce((total, current) => {
+                const currentValue = current.annualTime
+                return total + +currentValue
+            }, 0) / 8
+        const newUserData = {
+            ...userData, 
+            annualLeave: userData.annualLeave - newAnnualLeave,
+            annualLeaveList: [
+                ...userData.annualLeaveList,
+                {
+                    reason: annualData.reason,
+                    annualLeaveDateList: newAnnualLeaveDateList
+                }
+            ]
+        }
+        // console.log(newUserData)
+        dispatch(editUser(newUserData))
+        // setAnnualState(false)
     }
 
     return (
@@ -131,6 +171,7 @@ const AttendanceController = () => {
             setAnnualState={setAnnualState}
             annualData={annualData}
             handleAnnualData={handleAnnualData}
+            handleSubmitAnnual={handleSubmitAnnual}
         />
     )
 }

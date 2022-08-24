@@ -37,7 +37,8 @@ export default function Attendance(props) {
         workTimeFomated,
         handleChangeAnnualQuantity,
         annualData,
-        handleAnnualData
+        handleAnnualData,
+        handleSubmitAnnual
     } = props
     const checker = attendanceData.attendanceData && userData.attendanceId
 
@@ -163,7 +164,7 @@ export default function Attendance(props) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                            {endAttendanceData.map((row) => (
+                            {endAttendanceData?.map((row) => (
                                 <TableRow
                                 key={row._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -235,7 +236,7 @@ export default function Attendance(props) {
                         <TextField 
                                 id="outlined-basic-2" 
                                 label="Ngày nghỉ"
-                                value={userData.annualLeave}
+                                value={userData.annualLeave.toFixed(2)}
                                 disabled
                                 margin="dense"
                                 sx={{width: '100%', paddingRight: '1rem'}}
@@ -257,6 +258,7 @@ export default function Attendance(props) {
                             variant="contained" 
                             startIcon={<EventRepeatIcon />}
                             disabled={userData.annualLeave <= 0 ? true : false}
+                            onClick={handleSubmitAnnual}
                             sx={{
                                 position: 'relative',
                                 borderRadius: '0', 

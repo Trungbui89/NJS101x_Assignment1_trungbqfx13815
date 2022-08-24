@@ -10,7 +10,7 @@ export default function Header(props) {
             <ul className="list-items">
                 <li><Link to={'/home'}>Thông tin cá nhân</Link></li>
                 <li><Link to={'/attendance'}>Điểm danh</Link></li>
-                <li>Tra cứu giờ làm</li>
+                <li><Link to={'/search'}>Tra cứu giờ làm</Link></li>
                 <li>Thông tin Covid cá nhân</li>
             </ul>
             <div className="sign-out" onClick={(e) => handleLogout(e)}>

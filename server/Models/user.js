@@ -26,13 +26,13 @@ const userSchema = new Schema ({
     profilePicture: String,
     coverPicture: String,
     attendanceId: String,
-    annualLeaveList: {
+    annualLeaveList: [{
         reason: String,
         annualLeaveDateList: [{
             annualDate: Date,
             annualTime: Number
         }]
-    }
+    }]
 })
 
 module.exports = mongoose.model("User", userSchema)

@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import Login from './pages/login/LoginController'
-import Layout from './layout/Layout';
-import HomeController from './pages/home/HomeController';
-import Attendance from './pages/attendance/AttendanceController';
+import Layout from './layout/Layout'
+import HomeController from './pages/home/HomeController'
+import Attendance from './pages/attendance/AttendanceController'
+import Search from './pages/search/SearchController'
 
 function App() {
   const user = useSelector((state) => state.authReducer.authData)
@@ -16,6 +17,7 @@ function App() {
           <Route path='/home' element={user ? <HomeController /> : <Navigate to = '../login' />} />
           <Route path='/login' element={user ? <Navigate to = '../home' /> : <Login />} />
           <Route path='/attendance' element={user ? <Attendance /> : <Navigate to = '../login' />} />
+          <Route path='/search' element={user ? <Search /> : <Navigate to = '../login />' />} />
         </Routes>
       </Layout>
     </div>

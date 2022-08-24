@@ -34,6 +34,7 @@ export const editUser = (formData) => (dispatch) => {
     AuthApi.editUser(formData)
         .then( result => {
             dispatch({type: 'EDIT_USER_SUCCESS', payload: result.data})
+            alert('Cập nhật thành công!')
         })
         .catch ( err => {
             console.log(err)
