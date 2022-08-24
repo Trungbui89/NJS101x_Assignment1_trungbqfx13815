@@ -4,6 +4,7 @@ import moment from 'moment'
 import Attendance from './Attendance'
 import { addAttendance, getAttendanceInfo, endAttendance } from '../../store/action/attendanceAction'
 import { editUser } from '../../store/action/authAction'
+import { workTime_DMY } from '../../common/helper/workTime_DMY'
 
 const AttendanceController = () => {
     const dispatch = useDispatch()
@@ -68,10 +69,8 @@ const AttendanceController = () => {
             total + currentTime
         )
     }, 0)
-    const hours = Math.floor(workTime/(60*60*1000))
-    const minutes = Math.floor(((workTime - hours*60*60*1000))/(1000*60))
-    const seconds = Math.round((workTime - hours*60*60*1000 - minutes*60*1000)/1000)
-    const workTimeFomated = `${hours} giờ ${minutes} phút ${seconds} giây`
+    const workTimeFomated = workTime_DMY(workTime)
+
 
     // handle add/remove annualLeave input
     const handleChangeAnnualQuantity = (type) => {

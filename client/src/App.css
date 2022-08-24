@@ -4,9 +4,10 @@
   --black: #242d49;
   --gray: rgba(0, 0, 0, 0.75);
   --themeBlack: #2E2E2E;
+  --headerColor: linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
   --profileShadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
   --hrColor: #cfcdcd;
-  --bgColor: rgba(0, 0, 0, 0.03);
+  --bgColor: #f8f8f8;
   --buttonBg: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
   --inputColor: rgba(40, 52, 62, 0.07);
   --photo: #4CB256;

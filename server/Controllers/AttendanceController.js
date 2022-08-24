@@ -36,6 +36,21 @@ exports.addAttendance = (req, res, next) => {
 
 }
 
+exports.getAllAttendance = (req, res, next) => {
+    const userId = req.body._id
+    const userName = req.body.userName
+
+    Attendance.find({'user.userId': userId})
+    .then(results => {
+        if(results.length > 0) {
+            res.status(200).json({attendance: results})
+        } else {
+            res.status(404).json({message: 'user not found!'})
+        }
+    })
+    .catch(err => res.status(500).json({message: err}))
+}
+
 exports.getAttendanceInfo = (req, res, next) => {
     const id = req.body.attendanceId
 

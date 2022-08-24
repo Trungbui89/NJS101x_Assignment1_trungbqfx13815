@@ -84,7 +84,6 @@ exports.postEditUser = (req, res, next) => {
             return user.save()
         })
         .then(result => {
-            console.log(result)
             res.status(200).json({user: result})
         })
         .catch(err => {
