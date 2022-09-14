@@ -6,6 +6,7 @@ const cors = require('cors')
 const AuthRoute = require('./Routes/AuthRoute.js')
 const FilesRoute = require('./Routes/filesRoute.js')
 const AttendanceRoute = require('./Routes/AttendanceRoute.js')
+const CovidRoute = require('./Routes/CovidRoute')
 
 const app = express()
 
@@ -27,3 +28,4 @@ mongoose.connect(
 app.use('/auth', AuthRoute)
 app.use(FilesRoute)
 app.use('/attendance', AttendanceRoute)
+app.use('/covid', CovidRoute)
