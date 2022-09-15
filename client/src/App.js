@@ -14,12 +14,12 @@ function App() {
     <div className="App">
       <Layout>
         <Routes>
-          <Route path='/' element={user ? <Navigate to = 'home'/> : <Navigate to = 'login'/>} />
+          <Route path='/' element={user ? <Navigate to = 'home'/> : <Navigate to = 'login' />} />
           <Route path='/home' element={user ? <HomeController /> : <Navigate to = '../login' />} />
           <Route path='/login' element={user ? <Navigate to = '../home' /> : <Login />} />
           <Route path='/attendance' element={user ? <Attendance /> : <Navigate to = '../login' />} />
-          <Route path='/search' element={user ? <Search /> : <Navigate to = '../login />' />} />
-          <Route path='/covid_19' element={user ? <Covid19 /> : <Navigate to = '../login />' />} />
+          <Route path='/search' element={user ? <Search /> : <Navigate to = '../login' />} />
+          <Route path='/covid_19' element={user ? <Covid19 /> : <Navigate to = '../login' />} />
         </Routes>
       </Layout>
     </div>

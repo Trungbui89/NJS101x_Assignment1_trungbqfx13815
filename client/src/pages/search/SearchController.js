@@ -43,12 +43,12 @@ export default function SearchController() {
             return total
         }, [])
 
-    const annualDateList = user.annualLeaveList.reduce((newArr, item) => {
+    const annualDateList = user.annualLeaveList?.reduce((newArr, item) => {
         return newArr = [...newArr, ...item.annualLeaveDateList]
     }, [])
 
     const attendanceDateTitleList = attendanceTime.map(item => {
-            const newData = annualDateList.reduce((total, ele) => {
+            const newData = annualDateList?.reduce((total, ele) => {
                 if(convertToDMY(ele.annualDate) === item.date) {
                     total = ele.annualTime
                 }
@@ -80,7 +80,7 @@ export default function SearchController() {
     React.useEffect(() => {
         if(datePickerValue) {
             const timeAndAnnual = attendanceTime.map(item => {
-                const newData = annualDateList.reduce((total, ele) => {
+                const newData = annualDateList?.reduce((total, ele) => {
                     if(convertToDMY(ele.annualDate) === item.date) {
                         total = ele.annualTime
                     }
@@ -93,7 +93,7 @@ export default function SearchController() {
                 })
             })
 
-            const attendanceTotal = timeAndAnnual.reduce((total, item) => {
+            const attendanceTotal = timeAndAnnual?.reduce((total, item) => {
                 if(Number(item.date.split('/')[1]) === moment(datePickerValue).month() + 1) {
                     const cal = (item.time + item.annualTime*60*60*1000) - 8*60*60*1000
                     if(cal >= 0) {
