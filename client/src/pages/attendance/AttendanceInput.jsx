@@ -8,7 +8,6 @@ export default function AttendanceInput(props) {
         handleAnnualData
     } = props
 
-    // const [value, setValue] = React.useState(null)
     return (
         <>
             {annualData.annualLeaveDateList.map(ele =>
