@@ -23,7 +23,6 @@ const HomeView = (props) => {
 
     return (
         <div className="Home">
-            <div className="home-bg" />
             <div className="card-info">
 
                 <div className="profile-images">
