@@ -45,7 +45,6 @@ export default function Attendance(props) {
     return (
         <>
             <div className="Attendance">
-                <div className="Attendance-bg" />
                 <div className="card-info">
                     <div className="profile-container">
                         <div className="profile">
